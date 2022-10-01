@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Main8 {
+public class Main {
 
     int answer = 0;
     int[] dis = {1, -1, 5}; // 앞으로 1칸, 뒤로 1칸, 앞으로 5칸
@@ -46,7 +46,7 @@ public class Main8 {
         Scanner sc = new Scanner(System.in);
         int s = sc.nextInt();
         int e = sc.nextInt();
-        Main8 T = new Main8();
+        Main T = new Main();
         System.out.println(T.BFS(s, e));
     }
 }
