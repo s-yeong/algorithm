@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-public class Main5 {
-    
+public class Main {
+
     public static String solution(String str) {
 
         String answer = "";
@@ -13,22 +13,6 @@ public class Main5 {
         // lt(left) rt(right)
 
         while(lt < rt) {
-/*
-            if(!Character.isAlphabetic(chars[lt])) {
-                lt++;
-                continue;
-            }
-            if(!Character.isAlphabetic(chars[rt])) {
-                rt--;
-                continue;
-            }
-
-            char tmp = chars[lt];
-            chars[lt] = chars[rt];
-            chars[rt] = tmp;
-            lt++;
-            rt--;
-*/
 
             if(!Character.isAlphabetic(chars[lt])) lt++;
             else if(!Character.isAlphabetic(chars[rt])) rt--;
@@ -36,13 +20,12 @@ public class Main5 {
                 char tmp = chars[lt];
                 chars[lt] = chars[rt];
                 chars[rt] = tmp;
+                lt++;
+                rt--;
             }
-
-
         }
 
         answer = String.valueOf(chars);
-
 
         return answer;
     }
