@@ -24,13 +24,17 @@ public class Main {
         // 최대 100
         int w = sc.nextInt();   // 가로
         int h = sc.nextInt();   // 세로
-        int n = sc.nextInt();   // 점선의 개수
-
 
         ArrayList<Square> arr = new ArrayList<>();
-        ArrayList<Square> rmSquare = new ArrayList<>();
+
+        int n = sc.nextInt();   // 점선의 개수
+
+        // 0 -> 가로로 자르는 점선
+        // 1 -> 세로로 자르는 점선
 
         arr.add(new Square(0, h, 0, w));
+
+        ArrayList<Square> rmSquare = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int is = sc.nextInt();  // 0 - 가로, 1 - 세로
@@ -47,7 +51,7 @@ public class Main {
                         arr.add(new Square(tmp.h1, num, tmp.w1, tmp.w2));
                         arr.add(new Square(num, tmp.h2, tmp.w1, tmp.w2));
                     }
-                } else {    // 세로
+                } else {
                     // 가로 영향 받음 - w
                     if(tmp.w1 <= num && tmp.w2 >= num) {
                         rmSquare.add(tmp);
