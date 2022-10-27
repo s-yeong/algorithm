@@ -1,53 +1,59 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-public class Main10 {
-    public static int count(int[] arr, int dist) {
-        int ep = arr[0];
-        int cnt = 1;
-        for(int i=1; i<arr.length; i++) {
-            if(arr[i] - ep >= dist) {
+public class Main {
+    public static int count(int[] arr, int capacity) {
+
+        int cnt = 1;    // DVD 장수
+        int sum = 0;   // DVD에 담아낸 곡들의 합
+
+        for(int x : arr) {
+            sum += x;
+            if(sum > capacity) {
                 cnt++;
-                ep = arr[i];
+                sum = x;
             }
         }
         return cnt;
     }
-    public static int solution(int n, int c, int[] arr) {
+    public static int solution(int n, int m, int[] arr) {
 
         int answer = 0;
 
-        int lt = 1;
-        int rt = arr[n - 1];
-//        int rt = Arrays.stream(arr).max().getAsInt() - Arrays.stream(arr).min().getAsInt();
-        Arrays.sort(arr);
+        int lt = Arrays.stream(arr).max().getAsInt();
+        // arr의 최대값이 DVD가 될 수 있는 최소 용량(DVD에 arr 최대값 하나만 들어간 경우)
+        int rt = Arrays.stream(arr).sum();
+
         while(lt <= rt) {
-            int mid = (lt + rt) / 2;
-            if(count(arr, mid) >= c) {
-                lt = mid + 1;
+            int mid = (lt + rt) / 2;    // DVD 한장 용량
+
+            if(count(arr, mid) <= m) {
                 answer = mid;
-            } else rt = mid - 1;
+                rt = mid - 1;
+            } else lt = mid + 1;
 
         }
-
 
 
         return answer;
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = sc.nextInt();
-        int c = sc.nextInt();
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+
+        st = new StringTokenizer(br.readLine());
         int[] arr = new int[n];
         for(int i=0; i<n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        System.out.print(solution(n,c,arr));
+        System.out.print(solution(n,m,arr));
 
 
     }

@@ -1,52 +1,57 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-public class Main9 {
-    public static int count(int[] arr, int capacity) {
+public class Main {
+    public static int count(int[] arr, int dis) {
 
-        int cnt = 1;    // DVD 장수
-        int sum = 0;    // DVD에 담아낸 곡들의 합
-        for(int x : arr) {
-            if(sum+x>capacity) {
+        int cnt = 1;
+        int ep = arr[0];    // end point - 제일 왼쪽 좌표에 한마리 배치
+
+        for(int i=1;i<arr.length; i++) {
+            if(arr[i] - ep >= dis) {    // 가장 가까운 말의 거리가 dis니까, dis보다 크거나 같으면 된다.
                 cnt++;
-                sum = x;
-            } else sum += x;
+                ep = arr[i];
+            }
         }
+
         return cnt;
     }
-    public static int solution(int n, int m, int[] arr) {
+    public static int solution(int n, int c, int[] arr) {
 
         int answer = 0;
+        Arrays.sort(arr);
+        int lt = 1;
+        int rt = arr[n-1] - arr[0];
 
-        int lt = Arrays.stream(arr).max().getAsInt();
-        // arr의 최대값이 DVD가 될 수 있는 최소 용량(DVD에 arr 최대값 하나만 들어간 경우)
-        int rt = Arrays.stream(arr).sum();
+        while(lt <= rt) {
+            int mid = (lt + rt) / 2;
 
-
-        while (lt <= rt) {
-            int mid = (lt + rt) / 2;    // DVD 한장 용량
-            if (count(arr, mid) <= m) {
+            if(count(arr, mid) >= c) {
                 answer = mid;
-                rt = mid - 1;
-            } else lt = mid + 1;
-
+                lt = mid + 1;
+            } else rt = mid - 1;
         }
+
+
         return answer;
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = sc.nextInt();
-        int m = sc.nextInt();
+        int n = Integer.parseInt(st.nextToken());   // 마구간 수
+        int c = Integer.parseInt(st.nextToken());   // 말 수
+
+        st = new StringTokenizer(br.readLine());
         int[] arr = new int[n];
         for(int i=0; i<n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        System.out.print(solution(n,m,arr));
+        System.out.print(solution(n,c,arr));
 
 
     }
