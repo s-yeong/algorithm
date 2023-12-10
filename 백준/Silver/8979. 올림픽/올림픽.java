@@ -46,7 +46,7 @@ public class Main {
         });
 
         int rank = 1;
-
+        int count = 1;
         // 1등인 경우,
         if(nation_arr[0][NUM] == target) {
             System.out.println(rank);
@@ -58,14 +58,24 @@ public class Main {
         for(int idx=1; idx<nation_count; idx++) {
 
             if(nation_arr[idx-1][GOLD] > nation_arr[idx][GOLD]) {
+                if(count != rank) rank = count;
                 rank++;
+                count++;
             }
             else if(nation_arr[idx-1][SILVER] > nation_arr[idx][SILVER]) {
+                if(count != rank) rank = count;
                 rank++;
+                count++;
             }
             else if(nation_arr[idx-1][BRONZE] > nation_arr[idx][BRONZE]) {
+                if(count != rank) rank = count;
                 rank++;
+                count++;
             }
+            else {
+                count++;
+            }
+
 
             if(nation_arr[idx][NUM] == target) {
                 System.out.println(rank);
