@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -28,30 +30,33 @@ public class Main {
                 continue;
             }
 
-            int[] charsCount = new int[26];
-            for (char ch : str.toCharArray()) {
-                charsCount[ch - 'a']++;
+            List<Integer>[] charsIdxList = new ArrayList[26];
+            for(int i=0; i<26; i++) {
+                charsIdxList[i] = new ArrayList<>();
+            }
+
+            for(int idx=0; idx<str.length(); idx++) {
+                char ch = str.charAt(idx);
+                charsIdxList[ch - 'a'].add(idx);
             }
             int min = Integer.MAX_VALUE;
             int max = 0;
-            for (int idx = 0; idx < str.length(); idx++) {
 
-                if(charsCount[str.charAt(idx) - 'a'] < K) continue;
+            for(List<Integer> list : charsIdxList) {
 
-                int count = 1;
-                for (int targetIdx = idx + 1; targetIdx < str.length(); targetIdx++) {
-                    if (str.charAt(idx) == str.charAt(targetIdx)) {
-                        count++;
-                    }
+                int lt = 0;
+                for(int rt = 0; rt<list.size(); rt++) {
 
-                    if(count == K) {
-                        min = Math.min(min, targetIdx - idx + 1);
-                        max = Math.max(max, targetIdx - idx + 1);
-                        break;
+                    while(rt-lt+1 > K) lt++;
+
+                    if(rt-lt+1 == K) {
+                       min = Math.min(min, list.get(rt) - list.get(lt) + 1);
+                       max = Math.max(max, list.get(rt) - list.get(lt) + 1);
                     }
                 }
-
             }
+
+
 
             if (min == Integer.MAX_VALUE || max == 0) {
                 sb.append("-1").append("\n");
@@ -61,4 +66,5 @@ public class Main {
         }
         System.out.print(sb);
     }
+
 }
