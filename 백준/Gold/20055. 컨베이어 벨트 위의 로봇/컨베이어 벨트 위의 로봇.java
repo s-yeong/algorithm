@@ -27,7 +27,6 @@ public class Main {
     static int[][] belt;
     static int beltSize;
     static int answer;
-    static int robotCount;
     static int count;
     static final int DURABILITY = 0, ROBOT = 1;
     public static void main(String[] args) throws IOException {
@@ -81,7 +80,6 @@ public class Main {
         // 로봇이 내리는 위치에 도달하면 즉시 내림
         if (belt[n-1][ROBOT] == 1) {
             belt[n-1][ROBOT] = 0;
-            robotCount--;
         }
 
         belt[0][DURABILITY] = firstBelt[DURABILITY];
@@ -109,7 +107,6 @@ public class Main {
         // 로봇이 내리는 위치에 도달하면 즉시 내림
         if (belt[n-1][ROBOT] == 1) {
             belt[n-1][ROBOT] = 0;
-            robotCount--;
         }
     }
 
@@ -124,6 +121,5 @@ public class Main {
         belt[0][ROBOT] = 1;
         belt[0][DURABILITY]--;
         if(belt[0][DURABILITY] == 0) count++;
-        robotCount++;
     }
 }
