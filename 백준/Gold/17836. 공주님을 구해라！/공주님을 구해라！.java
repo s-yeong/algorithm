@@ -46,7 +46,6 @@
 
             boolean[][][] ch = new boolean[rowLen][colLen][2];
             int time = 0;
-            int gramTime = 0;
 
             // 0,0 시작
             Queue<Pos> Q = new ArrayDeque<>();
@@ -95,7 +94,6 @@
                 } //qLen end
                 time++;
 
-                // 그람을 통한 최단 거리를 넘어서면,
                 // 제한 시간 지나면,
                 if(time == limitTime) {
                     return -1;
