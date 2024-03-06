@@ -10,8 +10,8 @@ import java.util.*;
  * 4. 전부 다 녹을 때 까지 분리되지 않음면 0 출력
  *
  * [풀이]
- * 1. bfs
- * 2. 현재 큐에서 꺼낸 지점의 상하좌우가 모두 0이면 두 덩어리 이상으로 분리된 거
+ * 1. bfs + dfs
+ * 2. 한 번의 time에서 빙산이 녹은 다음 덩어리 계산
  */
 public class Main {
     static int rowLen, colLen;
