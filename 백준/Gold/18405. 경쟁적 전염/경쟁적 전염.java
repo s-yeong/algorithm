@@ -28,6 +28,10 @@ public class Main {
         s = Integer.parseInt(st.nextToken());
         x = Integer.parseInt(st.nextToken()) - 1;
         y = Integer.parseInt(st.nextToken()) - 1;
+        if(s==0) {
+            System.out.println(board[x][y]);
+            return;
+        }
         //S초가 지난 후에 (X,Y)에 존재하는 바이러스의 종류
         System.out.println(bfs(pQ));
     }
@@ -37,7 +41,7 @@ public class Main {
 
             Virus cur = pQ.poll();
             if (cur.time == s) {
-                break;
+                return board[x][y];
             }
 
             for(int dir=0; dir<4; dir++) {
